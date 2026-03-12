@@ -1,0 +1,41 @@
+# CHS 教材写作配置
+# 适用于《水系统控制论》系列 T1/T2/T3/M 系列教材
+
+engines:
+  claude:
+    provider: anthropic
+    model: claude-opus-4-6
+    api_key: ${ANTHROPIC_API_KEY}
+    role: architect
+    strengths: [理论推导, CHS理论, 公式推导, 整体架构]
+
+  gemini:
+    provider: google
+    model: gemini-2.5-pro
+    api_key: ${GOOGLE_API_KEY}
+    base_url: ${GOOGLE_GEMINI_BASE_URL}
+    role: reviewer
+    strengths: [教学设计, 难度梯度, 例题质量, 习题设计]
+
+  gpt:
+    provider: openai
+    model: gpt-4.1
+    api_key: ${OPENAI_API_KEY}
+    base_url: ${OPENAI_BASE_URL}
+    role: engineer
+    strengths: [代码实现, MATLAB示例, Python示例, 工程案例]
+
+default_engine: claude
+parallel_drafting: true
+
+# CHS 教材三角色评审
+review_roles:
+  - 学科教师    # 可教性、难度梯度、知识完整性
+  - 工程师      # 工程实用性、代码质量、可落地性
+  - 研究生      # 可读性、学习曲线、引用正确性
+
+consensus_threshold: 2
+output_dir: ./output/chs_books
+
+# CHS 知识库路径
+knowledge_base_path: ../HydroClaw/openclaw/knowledge-base

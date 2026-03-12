@@ -1,0 +1,56 @@
+# HydroWriter 多引擎配置
+# 用户可自由添加/修改引擎
+
+engines:
+  claude:
+    provider: anthropic
+    model: claude-opus-4-6
+    api_key: ${ANTHROPIC_API_KEY}
+    role: architect
+    strengths: [理论推导, 文献综述, 整体架构, 中文写作, 逻辑推理]
+    max_tokens: 8192
+    temperature: 0.7
+
+  gemini:
+    provider: google
+    model: gemini-2.5-pro
+    api_key: ${GOOGLE_API_KEY}
+    base_url: ${GOOGLE_GEMINI_BASE_URL}
+    role: reviewer
+    strengths: [教学设计, 案例分析, 可视化优化, 长文本处理]
+    max_tokens: 8192
+    temperature: 0.5
+
+  gpt:
+    provider: openai
+    model: gpt-4.1
+    api_key: ${OPENAI_API_KEY}
+    base_url: ${OPENAI_BASE_URL}
+    role: engineer
+    strengths: [代码生成, 算法优化, 工程实用性, 数据分析]
+    max_tokens: 8192
+    temperature: 0.7
+
+  # 可选引擎 — 取消注释启用
+  # deepseek:
+  #   provider: openai_compatible
+  #   model: deepseek-chat
+  #   api_key: ${DEEPSEEK_API_KEY}
+  #   base_url: https://api.deepseek.com/v1
+  #   role: specialist
+  #   strengths: [数学推理, 代码审查, 逻辑验证]
+
+  # qwen:
+  #   provider: openai_compatible
+  #   model: qwen-max
+  #   api_key: ${DASHSCOPE_API_KEY}
+  #   base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  #   role: specialist
+  #   strengths: [中文写作, 古典文学, 教育内容]
+
+default_engine: claude
+parallel_drafting: true
+review_roles: [teacher, engineer, reader]
+consensus_threshold: 2
+output_dir: ./output
+knowledge_base_path: ""

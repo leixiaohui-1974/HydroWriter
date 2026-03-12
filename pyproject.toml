@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "hydrowriter"
+version = "0.1.0"
+description = "Multi-LLM collaborative writing platform — 多引擎协同写作平台"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "jinja2>=3.1",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+claude = ["anthropic>=0.40"]
+gemini = ["google-genai>=1.0"]
+openai = ["openai>=1.50"]
+all = ["anthropic>=0.40", "google-genai>=1.0", "openai>=1.50"]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23"]
+ppt = ["python-pptx>=0.6"]
+
+[project.scripts]
+hydrowriter = "cli.main:cli"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "strict"
